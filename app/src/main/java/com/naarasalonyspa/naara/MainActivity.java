@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Crear lista de fragmentos para cada sección
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new Iniciot(this,"Inicio"));
+        fragments.add(new Inicio(this,"Inicio"));
         fragments.add(new AcercaDe(this,"Acerca de"));
         fragments.add(new Servicios(this,"Servicios"));
         fragments.add(new Precios(this,"Precios"));
