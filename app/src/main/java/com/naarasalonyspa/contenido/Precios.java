@@ -5,17 +5,23 @@ import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.content.Context;
+import android.content.Context;
+
+import androidx.fragment.app.Fragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import com.naarasalonyspa.diseno.SectionFragment;
 
-
-public Precios extends SectionFragment {
+public class Precios extends Fragment {
+  
+    protected String sectionName;
+    protected Context contexto;
 
 
     public Precios(Context contexto, String sectionName) {
-      super(contexto,sectionName);
+      
+        this.contexto = contexto;
+        this.sectionName = sectionName;
       
     }
 
