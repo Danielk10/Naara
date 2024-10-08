@@ -61,7 +61,14 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         
         
-      setContentView(viewPager);
+ // UI programática
+        TextView textView = new TextView(this);
+        textView.setText("Bienvenido a Naara Salón & Spa");
+        textView.setTextSize(24);
+        textView.setGravity(Gravity.CENTER);
+        
+        
+      setContentView(textView);
 
     }
     
