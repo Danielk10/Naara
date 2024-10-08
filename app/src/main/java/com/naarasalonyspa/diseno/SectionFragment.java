@@ -1,9 +1,5 @@
 package com.naarasalonyspa.diseno;
 
-import android.os.Bundle;
-import android.view.Gravity;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.content.Context;
 
 import androidx.fragment.app.Fragment;
@@ -11,11 +7,11 @@ import androidx.fragment.app.Fragment;
 public abstract class SectionFragment extends Fragment {
 
     protected String sectionName;
-    protected Context contecto;
+    protected Context contexto;
 
-    public SectionFragment(Context contecto, String sectionName) {
+    public SectionFragment(Context contexto, String sectionName) {
       
-        this.contecto = contecto;
+        this.contexto = contexto;
         this.sectionName = sectionName;
         
     }
