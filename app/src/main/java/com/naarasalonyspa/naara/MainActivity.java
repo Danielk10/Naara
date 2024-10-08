@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         
         AppCenter.start(getApplication(), "447c7f85-0c9e-4470-a7b3-86c55255b873",
                           Analytics.class, Crashes.class);
-       
+       /*
         // Crear ViewPager de manera programática
         ViewPager viewPager = new ViewPager(this);
         viewPager.setId(View.generateViewId());
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Configurar adaptador del ViewPager
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager(), fragments);
-        viewPager.setAdapter(adapter);
+        viewPager.setAdapter(adapter);*/
         
         
  // UI programática
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
       setContentView(textView);
 
     }
-    
+/*    
 @Override
 public boolean onCreateOptionsMenu(Menu menu) {
         // Agregar elementos del menú programáticamente
@@ -90,5 +90,5 @@ public boolean onCreateOptionsMenu(Menu menu) {
         });
 
         return true;
-    }
+    }*/
 }
