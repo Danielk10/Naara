@@ -21,12 +21,6 @@ public class MainActivity extends AppCompatActivity {
         AppCenter.start(getApplication(), "447c7f85-0c9e-4470-a7b3-86c55255b873",
                           Analytics.class, Crashes.class);
         
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+ 
     }
 }
