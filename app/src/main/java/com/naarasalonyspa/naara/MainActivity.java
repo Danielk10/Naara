@@ -1,4 +1,4 @@
-package com.diamon.guia;
+package com.naarasalonyspa.naara;
 
 import android.os.Bundle;
 
