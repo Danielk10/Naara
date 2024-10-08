@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
+/*
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
-import com.microsoft.appcenter.crashes.Crashes;
+import com.microsoft.appcenter.crashes.Crashes;*/
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        AppCenter.start(getApplication(), "447c7f85-0c9e-4470-a7b3-86c55255b873",
+      /*  AppCenter.start(getApplication(), "447c7f85-0c9e-4470-a7b3-86c55255b873",
                           Analytics.class, Crashes.class);
-       /*
+       
         // Crear ViewPager de manera programática
         ViewPager viewPager = new ViewPager(this);
         viewPager.setId(View.generateViewId());
