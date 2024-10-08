@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         // Crear ViewPager de manera programática
         ViewPager viewPager = new ViewPager(this);
         viewPager.setId(View.generateViewId());
-        setContentView(viewPager);
 
         // Crear lista de fragmentos para cada sección
         List<Fragment> fragments = new ArrayList<>();
@@ -60,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
         // Configurar adaptador del ViewPager
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager(), fragments);
         viewPager.setAdapter(adapter);
+        
+        
+      setContentView(viewPager);
+
     }
     
 @Override
