@@ -11,10 +11,10 @@ import androidx.annotation.Nullable;
 import com.naarasalonyspa.diseno.SectionFragment;
 
 
-public Inicio extends SectionFragment {
+public Precios extends SectionFragment {
 
 
-    public Inicio(Context contexto, String sectionName) {
+    public Precios(Context contexto, String sectionName) {
       super(contexto,sectionName);
       
     }
