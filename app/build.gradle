@@ -7,7 +7,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace 'com.diamon.guia'
+    namespace 'com.naarasalonyspa.naara'
     compileSdk 35
 
     defaultConfig {
