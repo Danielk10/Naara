@@ -1,4 +1,4 @@
-package com.diamon.guia;
+package com.naarasalonyspa.naara;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.diamon.guia", appContext.getPackageName());
+        assertEquals("com.naarasalonyspa.naara", appContext.getPackageName());
     }
 }
