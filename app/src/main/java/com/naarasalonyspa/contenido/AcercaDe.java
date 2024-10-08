@@ -14,8 +14,8 @@ import androidx.annotation.Nullable;
 
 public class AcercaDe extends Fragment {
   
-    protected String sectionName;
-    protected Context contexto;
+    private String sectionName;
+    private Context contexto;
 
 
     public AcercaDe(Context contexto, String sectionName) {

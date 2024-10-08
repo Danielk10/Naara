@@ -14,8 +14,8 @@ import androidx.annotation.Nullable;
 
 public class Servicios extends Fragment {
   
-    protected String sectionName;
-    protected Context contexto;
+    private String sectionName;
+    private Context contexto;
 
 
     public Servicios(Context contexto, String sectionName) {
