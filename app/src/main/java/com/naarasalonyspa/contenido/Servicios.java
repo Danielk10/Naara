@@ -161,7 +161,7 @@ public class Servicios extends Fragment {
                     fragments = new ArrayList<>();
                     
                     
-                               fragments.add(new Servicio(contexto,"Pelo","","",imagen));
+                               fragments.add(new Servicio(contexto,servicio.getString("nombre_servicio"),servicio.getString("descripcion_servicio"),servicio.getString("precio_servicio"),imagen));
 
                         AdaptadorViewPager adapter = new AdaptadorViewPager(actividad.getSupportFragmentManager(), fragments);
                         viewPager.setAdapter(adapter);
