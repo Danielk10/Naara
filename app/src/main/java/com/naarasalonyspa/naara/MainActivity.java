@@ -23,6 +23,10 @@ import android.widget.Toast;
 import android.view.View;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.tabs.TabLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+
 
 import android.widget.LinearLayout;
 import java.util.ArrayList;
@@ -43,12 +47,37 @@ public class MainActivity extends AppCompatActivity {
         AppCenter.start(getApplication(), "447c7f85-0c9e-4470-a7b3-86c55255b873",
                                   Analytics.class, Crashes.class);
                                   
-// Crear TabLayout de manera programática
+// Crear ConstraintLayout como el contenedor principal
+        ConstraintLayout mainLayout = new ConstraintLayout(this);
+        mainLayout.setLayoutParams(new ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.MATCH_PARENT, 
+                ConstraintLayout.LayoutParams.MATCH_PARENT
+        ));
+
+// Crear TabLayout
         TabLayout tabLayout = new TabLayout(this);
-      
-  // Crear ViewPager de manera programática
-        ViewPager viewPager = new ViewPager(this);
-        viewPager.setId(View.generateViewId());
+        tabLayout.setId(View.generateViewId());
+        tabLayout.setBackgroundColor(0xFF41B7FF); // Color de fondo #41B7FF
+        ConstraintLayout.LayoutParams tabLayoutParams = new ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.MATCH_PARENT,
+                ConstraintLayout.LayoutParams.WRAP_CONTENT
+        );
+        mainLayout.addView(tabLayout, tabLayoutParams);
+        
+  // Crear ViewPager
+          ViewPager viewPager = new ViewPager(this);
+          viewPager.setId(View.generateViewId());
+          ConstraintLayout.LayoutParams viewPagerParams = new ConstraintLayout.LayoutParams(
+                  ConstraintLayout.LayoutParams.MATCH_PARENT,
+                  0
+          );
+          viewPagerParams.topToBottom = tabLayout.getId();
+          viewPagerParams.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID;
+          viewPagerParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID;
+          viewPagerParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID;
+          viewPagerParams.height = 0; // Asigna el peso con constraints
+          mainLayout.addView(viewPager, viewPagerParams);
+       
 
         // Crear lista de fragmentos para cada sección
         List<Fragment> fragments = new ArrayList<>();
@@ -64,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         
         tabLayout.setupWithViewPager(viewPager);
         
-        setContentView(viewPager);
+        setContentView(mainLayout);
      
     }
     
