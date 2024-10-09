@@ -151,7 +151,7 @@ public class Servicios extends Fragment {
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoInput(true);
                 connection.connect();
-                InputStream input = connection.getInputStream();
+                //InputStream input = connection.getInputStream();
                 bitmap = BitmapFactory.decodeStream(input);
             } catch (Exception e) {
                 e.printStackTrace();
