@@ -1,68 +1,149 @@
 package com.naarasalonyspa.contenido;
 
-import android.os.Bundle;
-import android.view.Gravity;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.content.Context;
-
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
-
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class Servicios extends Fragment {
-  
-    private String sectionName;
+
     private Context contexto;
+    private LinearLayout diseno;
 
-
-    public Servicios(Context contexto, String sectionName) {
-      
+    public Servicios(Context contexto) {
         this.contexto = contexto;
-        this.sectionName = sectionName;
-      
     }
-    
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Crear ConstraintLayout de manera programática
-        ConstraintLayout layout = new ConstraintLayout(contexto);
-        layout.setLayoutParams(new ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.MATCH_PARENT,
-                ConstraintLayout.LayoutParams.MATCH_PARENT
+        // Crear LinearLayout de manera programática
+        diseno = new LinearLayout(contexto);
+        diseno.setOrientation(LinearLayout.VERTICAL);
+        diseno.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
         ));
-        layout.setBackgroundColor(0xFFFFA5A5); // Color de fondo #FFA5A5
+        diseno.setBackgroundColor(0xFFDFA5A5); // Color de fondo #DFA5A5
 
-        // Crear el botón de manera programática
-        Button button = new Button(contexto);
-        button.setId(View.generateViewId());
-        button.setText("Click here");
-        button.setTextSize(24);
-        
-        // Añadir el botón al layout
-        layout.addView(button);
+        // Ejecutar AsyncTask para obtener datos de la API
+        new FetchServiciosTask().execute("https://www.naarasalonyspa.com/serviciosapi/");
 
-        // Configurar las restricciones del botón
-        ConstraintSet constraintSet = new ConstraintSet();
-        constraintSet.clone(layout);
+        return diseno;
+    }
 
-        constraintSet.constrainWidth(button.getId(), ConstraintSet.MATCH_CONSTRAINT);
-        constraintSet.constrainHeight(button.getId(), ConstraintSet.WRAP_CONTENT);
-        constraintSet.connect(button.getId(), ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 32);
-        constraintSet.connect(button.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 32);
-        constraintSet.connect(button.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP);
-        constraintSet.connect(button.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM);
+    private class FetchServiciosTask extends AsyncTask<String, Void, String> {
 
-        constraintSet.applyTo(layout);
+        @Override
+        protected String doInBackground(String... urls) {
+            StringBuilder result = new StringBuilder();
+            try {
+                URL url = new URL(urls[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.connect();
 
-        return layout;
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    result.append(line);
+                }
+                reader.close();
+            } catch (Exception e) {
+                return null;
+            }
+            return result.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result != null) {
+                try {
+                    // Parsear JSON
+                    JSONArray jsonArray = new JSONArray(result);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject servicio = jsonArray.getJSONObject(i);
+                        String linkImagen = servicio.getString("imagen_servicio");
+
+                        // Crear TextViews para mostrar el contenido
+                        TextView tvNombre = new TextView(contexto);
+                        tvNombre.setText("Nombre: " + servicio.getString("nombre_servicio"));
+                        tvNombre.setTextSize(18);
+
+                        TextView tvDescripcion = new TextView(contexto);
+                        tvDescripcion.setText("Descripción: " + servicio.getString("descripcion_servicio"));
+                        tvDescripcion.setTextSize(16);
+
+                        TextView tvFechaCreacion = new TextView(contexto);
+                        tvFechaCreacion.setText("Fecha de Creación: " + servicio.getString("fecha_de_creacion"));
+
+                        TextView tvPrecio = new TextView(contexto);
+                        tvPrecio.setText("Precio: $" + servicio.getString("precio_servicio"));
+
+                        // Añadir TextViews al layout
+                        diseno.addView(tvNombre);
+                        diseno.addView(tvDescripcion);
+                        diseno.addView(tvFechaCreacion);
+                        diseno.addView(tvPrecio);
+
+                        // Descargar y mostrar la imagen
+                        new ImageDownloaderTask().execute(linkImagen);
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(contexto, "Error al procesar datos", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(contexto, "Error de conexión", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    // Clase para descargar la imagen en segundo plano
+    private class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
+        @Override
+        protected Bitmap doInBackground(String... urls) {
+            String imageUrl = urls[0];
+            Bitmap bitmap = null;
+            try {
+                URL url = new URL(imageUrl);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                bitmap = BitmapFactory.decodeStream(input);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            if (result != null) {
+                // Crear ImageView para la imagen del servicio
+                ImageView ivImagenServicio = new ImageView(contexto);
+                ivImagenServicio.setAdjustViewBounds(true);
+                ivImagenServicio.setImageBitmap(result);
+                diseno.addView(ivImagenServicio);
+            }
+        }
     }
 }
