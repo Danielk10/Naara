@@ -63,7 +63,7 @@ public class Servicios extends Fragment {
     private List<Fragment> fragments;
     private AdaptadorViewPager adapter;
     private Bitmap imagen;
-    private Activity actividad;
+    private AppCompatActivity actividad;
 
     public Servicios(Context contexto, AppCompatActivity actividad,String sectionName) {
       
