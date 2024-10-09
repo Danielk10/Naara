@@ -205,7 +205,7 @@ public class Servicios extends Fragment {
                 ivImagenServicio.setAdjustViewBounds(true);
                 ivImagenServicio.setImageBitmap(result);
                 
-                this.imagen = bitmap;
+                this.imagen = result;
                 
               //  diseno.addView(ivImagenServicio);
             }
