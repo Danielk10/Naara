@@ -17,15 +17,26 @@ import androidx.fragment.app.Fragment;
 
 public class Servicio extends Fragment {
   
-    private String sectionName;
     private Context contexto;
     private ViewGroup diseno;
+    private String nombre;
+    private String descricion;
+    private String precio;
+    private Bitmap imagen;
 
 
-    public Servicio(Context contexto, String sectionName) {
+    public Servicio(Context contexto, String nombre, String descricion, String precio, Bitmap imagen)
+      	{
       
         this.contexto = contexto;
-        this.sectionName = sectionName;
+        
+        this.nombre = nombre;
+        		
+        this.descricion = descricion;
+        		
+        this.precio = precio;
+        		
+        this.imagen = imagen;
         
         diseno = new LinearLayout(contexto);
         		diseno.setLayoutParams(new LinearLayout.LayoutParams(
@@ -41,10 +52,33 @@ public class Servicio extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
      
-        diseno.setBackgroundColor(0xFFFFA5A5); // Color de fondo #FFA5A5
+        diseno.setBackgroundColor(0xFFFFA5A5); 
         
-        // Añadir el botón al layout
-        diseno.addView(button);
+        TextView	 tvNombre = new TextView(contexto);
+        		tvNombre.setId(View.generateViewId());
+        		tvNombre.setText(nombre);
+        		tvNombre.setTextSize(18);
+        
+        		TextView tvDescripcion = new TextView(contexto);
+        		tvDescripcion.setId(View.generateViewId());
+        		tvDescripcion.setText(descricion);
+        		tvDescripcion.setTextSize(16);
+        
+        		TextView tvPrecio = new TextView(contexto);
+        		tvPrecio.setId(View.generateViewId());
+        		tvPrecio.setText(precio);
+        		
+        		ImageView  ivImagenServicio = new ImageView(contexto);
+        		ivImagenServicio.setId(View.generateViewId());
+        		ivImagenServicio.setAdjustViewBounds(true);
+        		ivImagenServicio.setImageBitmap(imagen);
+        		diseno.addView(ivImagenServicio);
+        		
+        
+        		diseno.addView(tvNombre);
+        		diseno.addView(tvDescripcion);
+        		diseno.addView(tvPrecio);
+        		diseno.addView(ivImagenServicio);
 
         return diseno;
     }
