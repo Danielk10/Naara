@@ -105,7 +105,7 @@ public class Servicios extends Fragment {
         ));
   
   
-         scrollView.addView(diseno)
+         scrollView.addView(diseno);
 
         // Ejecutar AsyncTask para obtener datos de la API
         new FetchServiciosTask().execute("https://www.naarasalonyspa.com/serviciosapi/");
