@@ -63,6 +63,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
+import android.graphics.Color;
+
+import android.graphics.Typeface;
+
 
 
 public class Servicios extends Fragment {
@@ -98,8 +102,8 @@ public class Servicios extends Fragment {
         ));
 // LinearLayout vertical para los elementos de servicio
         diseno = new LinearLayout(contexto);
-        mainLayout.setOrientation(LinearLayout.VERTICAL);
-        mainLayout.setLayoutParams(new ViewGroup.LayoutParams(
+        diseno.setOrientation(LinearLayout.VERTICAL);
+        diseno.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         ));
