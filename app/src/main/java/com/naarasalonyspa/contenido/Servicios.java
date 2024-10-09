@@ -26,10 +26,14 @@ import java.net.URL;
 public class Servicios extends Fragment {
 
     private Context contexto;
+    private String sectionName;
     private LinearLayout diseno;
 
-    public Servicios(Context contexto) {
+    public Servicios(Context contexto,String sectionName) {
+      
         this.contexto = contexto;
+        this.sectionName = sectionName;
+
     }
 
     @Nullable
