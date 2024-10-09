@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         invalidateOptionsMenu();
         
 // Llamada a la API
-        new FetchServiciosTask().execute("http://127.0.0.1:8000/servicios/");
+        new FetchServiciosTask(this).execute("http://127.0.0.1:8000/servicios/");
      
     }
     
