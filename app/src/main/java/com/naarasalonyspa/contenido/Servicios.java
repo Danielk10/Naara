@@ -48,6 +48,7 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.List;
 import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 
 
 
@@ -63,10 +64,6 @@ public class Servicios extends Fragment {
     private AdaptadorViewPager adapter;
     private Bitmap imagen;
     private Activity actividad;
-    import androidx.appcompat.app.AppCompatActivity;
-
-
-
 
     public Servicios(Context contexto, AppCompatActivity actividad,String sectionName) {
       
