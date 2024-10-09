@@ -28,8 +28,24 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
   
         @Override
         public CharSequence getPageTitle(int position) {
+          
+          
+          switch (position) {
+                case 0:
+                    return "Inicio";
+                case 1:
+                    return "Acerca de";
+                case 2:
+                    return "Servicios";
+                case 3:
+                    return "Precios";
+                case 4:
+                    return "Contacto";
 
-           return fragmentList.get(position).toString();
+                default:
+                    return null;
+            }
+
         }
 
     @Override
