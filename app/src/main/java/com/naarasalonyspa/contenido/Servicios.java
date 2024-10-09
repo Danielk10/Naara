@@ -86,12 +86,6 @@ public class Servicios extends Fragment {
         ));
         diseno.setBackgroundColor(0xFFDFA5A5); // Color de fondo #DFA5A5
         
-                            fragments = new ArrayList<>();
-        
-                                AdaptadorViewPager adapter = new AdaptadorViewPager(actividad.getSupportFragmentManager(), fragments);
-                                viewPager.setAdapter(adapter);
-                             
-        
 
         // Ejecutar AsyncTask para obtener datos de la API
         new FetchServiciosTask().execute("https://www.naarasalonyspa.com/serviciosapi/");
@@ -147,26 +141,28 @@ public class Servicios extends Fragment {
                         TextView tvPrecio = new TextView(contexto);
                         tvPrecio.setText("Precio: $" + servicio.getString("precio_servicio"));
 
-                        // Añadir TextViews al layout
-                      //  diseno.addView(tvNombre);
-                      //  diseno.addView(tvDescripcion);
-//diseno.addView(tvFechaCreacion);
-                       // diseno.addView(tvPrecio);
+                         Añadir TextViews al layout
+                        diseno.addView(tvNombre);
+                        diseno.addView(tvDescripcion);
+                      diseno.addView(tvFechaCreacion);
+                        diseno.addView(tvPrecio);
 
                         // Descargar y mostrar la imagen
                         new ImageDownloaderTask().execute(linkImagen);
                         
-           
-           
-           
-           
-                             viewPager = new ViewPager(contexto);
+                            /* viewPager = new ViewPager(contexto);
                              viewPager.setId(View.generateViewId());
                          diseno.addView(viewPager);
-                         
-                    
                     
                                fragments.add(new Servicio(contexto,servicio.getString("nombre_servicio"),servicio.getString("descripcion_servicio"),servicio.getString("precio_servicio"),imagen));
+                                         fragments = new ArrayList<>();
+                                    
+                                                            AdaptadorViewPager adapter = new AdaptadorViewPager(actividad.getSupportFragmentManager(), fragments);
+                                                            viewPager.setAdapter(adapter);
+                                                         
+                              
+                               
+                            */   
 
                     }
                 } catch (Exception e) {
@@ -205,9 +201,9 @@ public class Servicios extends Fragment {
                 ivImagenServicio.setAdjustViewBounds(true);
                 ivImagenServicio.setImageBitmap(result);
                 
-                imagen = result;
+               // imagen = result;
                 
-              //  diseno.addView(ivImagenServicio);
+                diseno.addView(ivImagenServicio);
             }
         }
     }
