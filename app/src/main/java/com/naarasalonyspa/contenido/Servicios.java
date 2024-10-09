@@ -63,10 +63,12 @@ public class Servicios extends Fragment {
     private AdaptadorViewPager adapter;
     private Bitmap imagen;
     private Activity actividad;
+    import androidx.appcompat.app.AppCompatActivity;
 
 
 
-    public Servicios(Context contexto, Activity actividad,String sectionName) {
+
+    public Servicios(Context contexto, AppCompatActivity actividad,String sectionName) {
       
         this.contexto = contexto;
         this.sectionName = sectionName;
@@ -205,7 +207,7 @@ public class Servicios extends Fragment {
                 ivImagenServicio.setAdjustViewBounds(true);
                 ivImagenServicio.setImageBitmap(result);
                 
-                this.imagen = result;
+                imagen = result;
                 
               //  diseno.addView(ivImagenServicio);
             }
