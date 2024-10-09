@@ -44,6 +44,10 @@ import java.net.URL;
 import com.naarasalonyspa.diseno.AdaptadorViewPager;
 import com.naarasalonyspa.tarjetas.Servicio;
 import android.app.Activity;
+import android.widget.LinearLayout;
+import java.util.ArrayList;
+import java.util.List;
+import androidx.viewpager.widget.ViewPager;
 
 
 
