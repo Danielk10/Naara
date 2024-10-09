@@ -109,17 +109,17 @@ public class Servicio extends Fragment {
         		tvPrecio.setId(View.generateViewId());
         		tvPrecio.setText(precio);
         		
-        		ImageView  ivImagenServicio = new ImageView(contexto);
+        		/*ImageView  ivImagenServicio = new ImageView(contexto);
         		ivImagenServicio.setId(View.generateViewId());
         		ivImagenServicio.setAdjustViewBounds(true);
         		ivImagenServicio.setImageBitmap(imagen);
-        		diseno.addView(ivImagenServicio);
+        		diseno.addView(ivImagenServicio);*/
         		
         
         		diseno.addView(tvNombre);
         		diseno.addView(tvDescripcion);
         		diseno.addView(tvPrecio);
-        		diseno.addView(ivImagenServicio);
+        		//diseno.addView(ivImagenServicio);
 
         return diseno;
     }
