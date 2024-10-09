@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new Inicio(this,"Inicio"));
         fragments.add(new AcercaDe(this,"Acerca de"));
-        fragments.add(new Servicios(this,"Servicios"));
+        fragments.add(new Servicios(this,this,"Servicios"));
         fragments.add(new Precios(this,"Precios"));
         fragments.add(new Contacto(this,"Contacto"));
 

@@ -43,6 +43,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import com.naarasalonyspa.diseno.AdaptadorViewPager;
 import com.naarasalonyspa.tarjetas.Servicio;
+import android.app.Activity;
 
 
 
@@ -57,14 +58,16 @@ public class Servicios extends Fragment {
     private List<Fragment> fragments;
     private AdaptadorViewPager adapter;
     private Bitmap imagen;
+    private Activity actividad;
 
 
 
-    public Servicios(Context contexto,String sectionName) {
+    public Servicios(Context contexto, Activity actividad,String sectionName) {
       
         this.contexto = contexto;
         this.sectionName = sectionName;
         this.imagen = null;
+        this.actividad = actividad;
 
     }
 
@@ -86,7 +89,7 @@ public class Servicios extends Fragment {
               
          fragments = new ArrayList<>();
          
-             AdaptadorViewPager adapter = new AdaptadorViewPager(contexto.getSupportFragmentManager(), fragments);
+             AdaptadorViewPager adapter = new AdaptadorViewPager(actividad.getSupportFragmentManager(), fragments);
              viewPager.setAdapter(adapter);
           
         // Ejecutar AsyncTask para obtener datos de la API
