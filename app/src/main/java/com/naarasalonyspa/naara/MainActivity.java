@@ -37,6 +37,8 @@ import com.naarasalonyspa.contenido.AcercaDe;
 import com.naarasalonyspa.contenido.Precios;
 import com.naarasalonyspa.contenido.Servicios;
 import com.naarasalonyspa.contenido.Contacto;
+import com.naarasalonyspa.servidor.FetchServiciosTask;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -97,6 +99,10 @@ public class MainActivity extends AppCompatActivity {
         
 // Esto es importante para que el menú se muestre
         invalidateOptionsMenu();
+        
+// Llamada a la API
+        new FetchServiciosTask().execute("http://127.0.0.1:8000/servicios/");
+    }
     
      
     }
