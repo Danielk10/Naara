@@ -52,6 +52,12 @@ public class Servicios extends Fragment {
     private Context contexto;
     private String sectionName;
     private LinearLayout diseno;
+    private Servicio servicio;
+    private ViewPager viewPager;
+    private List<Fragment> fragments;
+    private AdaptadorViewPager adapter;
+
+
 
     public Servicios(Context contexto,String sectionName) {
       
@@ -71,7 +77,21 @@ public class Servicios extends Fragment {
                 LinearLayout.LayoutParams.MATCH_PARENT
         ));
         diseno.setBackgroundColor(0xFFDFA5A5); // Color de fondo #DFA5A5
-
+        
+                  viewPager = new ViewPager(this);
+                  viewPager.setId(View.generateViewId());
+              diseno.addView(viewPager);
+              
+         fragments = new ArrayList<>();
+         
+         
+         
+         fragments.add(new Inicio(this,"Inicio"));
+        
+     
+             AdaptadorViewPager adapter = new AdaptadorViewPager(getSupportFragmentManager(), fragments);
+             viewPager.setAdapter(adapter);
+          
         // Ejecutar AsyncTask para obtener datos de la API
         new FetchServiciosTask().execute("https://www.naarasalonyspa.com/serviciosapi/");
 
