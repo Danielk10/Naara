@@ -83,15 +83,7 @@ public class Servicios extends Fragment {
         ));
         diseno.setBackgroundColor(0xFFDFA5A5); // Color de fondo #DFA5A5
         
-                  viewPager = new ViewPager(this);
-                  viewPager.setId(View.generateViewId());
-              diseno.addView(viewPager);
-              
-         fragments = new ArrayList<>();
-         
-             AdaptadorViewPager adapter = new AdaptadorViewPager(actividad.getSupportFragmentManager(), fragments);
-             viewPager.setAdapter(adapter);
-          
+
         // Ejecutar AsyncTask para obtener datos de la API
         new FetchServiciosTask().execute("https://www.naarasalonyspa.com/serviciosapi/");
 
@@ -156,6 +148,19 @@ public class Servicios extends Fragment {
                         new ImageDownloaderTask().execute(linkImagen);
                         
            fragments.add(new Servicio(contexto,"Pelo","","",imagen));
+           
+           
+           
+           
+                             viewPager = new ViewPager(this);
+                             viewPager.setId(View.generateViewId());
+                         diseno.addView(viewPager);
+                         
+                    fragments = new ArrayList<>();
+                    
+                        AdaptadorViewPager adapter = new AdaptadorViewPager(actividad.getSupportFragmentManager(), fragments);
+                        viewPager.setAdapter(adapter);
+                     
 
                     }
                 } catch (Exception e) {
