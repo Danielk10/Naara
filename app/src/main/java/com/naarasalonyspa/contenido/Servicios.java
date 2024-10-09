@@ -49,7 +49,19 @@ import java.util.ArrayList;
 import java.util.List;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
 
 
 
@@ -77,20 +89,28 @@ public class Servicios extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Crear LinearLayout de manera programática
-        diseno = new LinearLayout(contexto);
-        diseno.setOrientation(LinearLayout.VERTICAL);
-        diseno.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
+      
+// ScrollView contenedor principal
+        ScrollView scrollView = new ScrollView(contexto);
+        scrollView.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
         ));
-        diseno.setBackgroundColor(0xFFDFA5A5); // Color de fondo #DFA5A5
-        
+// LinearLayout vertical para los elementos de servicio
+        diseno = new LinearLayout(contexto);
+        mainLayout.setOrientation(LinearLayout.VERTICAL);
+        mainLayout.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        ));
+  
+  
+         scrollView.addView(diseno)
 
         // Ejecutar AsyncTask para obtener datos de la API
         new FetchServiciosTask().execute("https://www.naarasalonyspa.com/serviciosapi/");
 
-        return diseno;
+        return scrollView;
     }
 
     private class FetchServiciosTask extends AsyncTask<String, Void, String> {
@@ -126,7 +146,63 @@ public class Servicios extends Fragment {
                         JSONObject servicio = jsonArray.getJSONObject(i);
                         String linkImagen = servicio.getString("imagen_servicio");
 
-                        // Crear TextViews para mostrar el contenido
+LinearLayout serviceLayout = new LinearLayout(contexto);
+        serviceLayout.setOrientation(LinearLayout.HORIZONTAL);
+        serviceLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
+        serviceLayout.setPadding(16, 16, 16, 16);
+
+
+
+// ImageView para la imagen del servicio
+			ImageView imageView = new ImageView(contexto);
+			LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(200, 200);
+			imageView.setLayoutParams(imageParams);
+
+			new ImageDownloaderTask(imageView).execute(linkImagen);	
+
+
+			// LinearLayout vertical para el texto del servicio
+			LinearLayout textLayout = new LinearLayout(contexto);
+			textLayout.setOrientation(LinearLayout.VERTICAL);
+			textLayout.setLayoutParams(new LinearLayout.LayoutParams(
+										   LinearLayout.LayoutParams.MATCH_PARENT,
+										   LinearLayout.LayoutParams.WRAP_CONTENT
+									   ));
+			textLayout.setPadding(16, 0, 0, 0);
+
+			// TextView para el nombre del servicio
+			TextView nameTextView = new TextView(contexto);
+			nameTextView.setText(servicio.getString("nombre_servicio"));
+			nameTextView.setTextSize(18);
+			nameTextView.setTypeface(null, Typeface.BOLD);
+
+			// TextView para la descripción del servicio
+			TextView descriptionTextView = new TextView(contexto);
+			descriptionTextView.setText(servicio.getString("descripcion_servicio"));
+			descriptionTextView.setTextSize(14);
+
+			// TextView para el precio del servicio
+			TextView priceTextView = new TextView(contexto);
+			priceTextView.setText("Precio: " + servicio.getString("precio_servicio"));
+			priceTextView.setTextSize(16);
+			priceTextView.setTextColor(Color.parseColor("#FF5722")); // Ejemplo de color naranja
+
+			// Añadir los TextViews al layout de texto
+			textLayout.addView(nameTextView);
+			textLayout.addView(descriptionTextView);
+			textLayout.addView(priceTextView);
+
+			// Añadir la imagen y el layout de texto al layout principal de cada servicio
+			serviceLayout.addView(imageView);
+			serviceLayout.addView(textLayout);
+
+			diseno.addView(serviceLayout);
+
+
+                        /*// Crear TextViews para mostrar el contenido
                         TextView tvNombre = new TextView(contexto);
                         tvNombre.setText("Nombre: " + servicio.getString("nombre_servicio"));
                         tvNombre.setTextSize(18);
@@ -174,6 +250,15 @@ public class Servicios extends Fragment {
 
     // Clase para descargar la imagen en segundo plano
     private class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
+      
+      ImageView imageView;
+      
+      
+      			public ImageDownloaderTask(ImageView imageView) {
+      				this.imageView = imageView;
+      			}
+      
+
         @Override
         protected Bitmap doInBackground(String... urls) {
             String imageUrl = urls[0];
@@ -193,16 +278,10 @@ public class Servicios extends Fragment {
 
         @Override
         protected void onPostExecute(Bitmap result) {
-            if (result != null) {
-                // Crear ImageView para la imagen del servicio
-                ImageView ivImagenServicio = new ImageView(contexto);
-                ivImagenServicio.setAdjustViewBounds(true);
-                ivImagenServicio.setImageBitmap(result);
-                
-               // imagen = result;
-                
-                diseno.addView(ivImagenServicio);
-            }
+            				if (result != null) {
+            					imageView.setImageBitmap(result);
+            				}
+            
         }
     }
 }
