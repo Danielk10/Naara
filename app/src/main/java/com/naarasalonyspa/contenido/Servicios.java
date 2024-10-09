@@ -147,7 +147,6 @@ public class Servicios extends Fragment {
                         // Descargar y mostrar la imagen
                         new ImageDownloaderTask().execute(linkImagen);
                         
-           fragments.add(new Servicio(contexto,"Pelo","","",imagen));
            
            
            
@@ -158,6 +157,9 @@ public class Servicios extends Fragment {
                          
                     fragments = new ArrayList<>();
                     
+                    
+                               fragments.add(new Servicio(contexto,"Pelo","","",imagen));
+
                         AdaptadorViewPager adapter = new AdaptadorViewPager(actividad.getSupportFragmentManager(), fragments);
                         viewPager.setAdapter(adapter);
                      
