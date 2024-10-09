@@ -42,11 +42,6 @@ public class MainActivity extends AppCompatActivity {
         
         AppCenter.start(getApplication(), "447c7f85-0c9e-4470-a7b3-86c55255b873",
                                   Analytics.class, Crashes.class);
-    
-// Crear Layout principal
-        LinearLayout mainLayout = new LinearLayout(this);
-        mainLayout.setOrientation(LinearLayout.VERTICAL);
-
                                   
 // Crear TabLayout de manera programática
         TabLayout tabLayout = new TabLayout(this);
@@ -68,10 +63,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         
         tabLayout.setupWithViewPager(viewPager);
-  
-        mainLayout.addView(viewPager);
         
-        setContentView(mainLayout);
+        setContentView(viewPager);
      
     }
     
