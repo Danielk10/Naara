@@ -140,8 +140,6 @@ public class Servicios extends Fragment {
 
                         TextView tvPrecio = new TextView(contexto);
                         tvPrecio.setText("Precio: $" + servicio.getString("precio_servicio"));
-
-                         Añadir TextViews al layout
                         diseno.addView(tvNombre);
                         diseno.addView(tvDescripcion);
                       diseno.addView(tvFechaCreacion);
