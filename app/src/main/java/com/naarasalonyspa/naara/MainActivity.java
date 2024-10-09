@@ -94,11 +94,16 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         
         setContentView(mainLayout);
+        
+// Esto es importante para que el menú se muestre
+        invalidateOptionsMenu();
+    
      
     }
     
+    
 @Override
-public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Agregar elementos del menú programáticamente
         MenuItem menuServicios = menu.add(Menu.NONE, 1, 1, "Servicios");
         MenuItem menuContacto = menu.add(Menu.NONE, 2, 2, "Contacto");
@@ -116,4 +121,20 @@ public boolean onCreateOptionsMenu(Menu menu) {
 
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Manejar eventos del menú
+        switch (item.getItemId()) {
+            case 1: // Servicios
+                Toast.makeText(this, "Servicios seleccionados", Toast.LENGTH_SHORT).show();
+                return true;
+            case 2: // Contacto
+                Toast.makeText(this, "Contacto seleccionado", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }
