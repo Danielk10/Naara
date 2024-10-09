@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
 import androidx.fragment.app.Fragment;
-
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         AppCenter.start(getApplication(), "447c7f85-0c9e-4470-a7b3-86c55255b873",
                                   Analytics.class, Crashes.class);
                                   
+// Crear TabLayout de manera programática
+        TabLayout tabLayout = new TabLayout(this);
+      
   // Crear ViewPager de manera programática
         ViewPager viewPager = new ViewPager(this);
         viewPager.setId(View.generateViewId());
@@ -57,8 +60,10 @@ public class MainActivity extends AppCompatActivity {
         // Configurar adaptador del ViewPager
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager(), fragments);
         viewPager.setAdapter(adapter);
+        
+        tabLayout.setupWithViewPager(viewPager);
   
-        setContentView(viewPager);
+        setContentView(tabLayout);
      
     }
     
