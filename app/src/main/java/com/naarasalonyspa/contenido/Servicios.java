@@ -155,7 +155,7 @@ public class Servicios extends Fragment {
            
            
            
-                             viewPager = new ViewPager(this);
+                             viewPager = new ViewPager(contexto);
                              viewPager.setId(View.generateViewId());
                          diseno.addView(viewPager);
                          
