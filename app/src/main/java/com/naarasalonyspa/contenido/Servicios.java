@@ -56,6 +56,7 @@ public class Servicios extends Fragment {
     private ViewPager viewPager;
     private List<Fragment> fragments;
     private AdaptadorViewPager adapter;
+    private Bitmap imagen;
 
 
 
@@ -63,6 +64,7 @@ public class Servicios extends Fragment {
       
         this.contexto = contexto;
         this.sectionName = sectionName;
+        this.imagen = null;
 
     }
 
@@ -84,12 +86,7 @@ public class Servicios extends Fragment {
               
          fragments = new ArrayList<>();
          
-         
-         
-         fragments.add(new Inicio(this,"Inicio"));
-        
-     
-             AdaptadorViewPager adapter = new AdaptadorViewPager(getSupportFragmentManager(), fragments);
+             AdaptadorViewPager adapter = new AdaptadorViewPager(contexto.getSupportFragmentManager(), fragments);
              viewPager.setAdapter(adapter);
           
         // Ejecutar AsyncTask para obtener datos de la API
@@ -147,13 +144,16 @@ public class Servicios extends Fragment {
                         tvPrecio.setText("Precio: $" + servicio.getString("precio_servicio"));
 
                         // Añadir TextViews al layout
-                        diseno.addView(tvNombre);
-                        diseno.addView(tvDescripcion);
-                        diseno.addView(tvFechaCreacion);
-                        diseno.addView(tvPrecio);
+                      //  diseno.addView(tvNombre);
+                      //  diseno.addView(tvDescripcion);
+//diseno.addView(tvFechaCreacion);
+                       // diseno.addView(tvPrecio);
 
                         // Descargar y mostrar la imagen
                         new ImageDownloaderTask().execute(linkImagen);
+                        
+           fragments.add(new Servicio(contexto,"Pelo","","",imagen));
+
                     }
                 } catch (Exception e) {
                     Toast.makeText(contexto, "Error al procesar datos", Toast.LENGTH_SHORT).show();
@@ -190,7 +190,10 @@ public class Servicios extends Fragment {
                 ImageView ivImagenServicio = new ImageView(contexto);
                 ivImagenServicio.setAdjustViewBounds(true);
                 ivImagenServicio.setImageBitmap(result);
-                diseno.addView(ivImagenServicio);
+                
+                this.imagen = bitmap;
+                
+              //  diseno.addView(ivImagenServicio);
             }
         }
     }
